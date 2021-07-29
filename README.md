@@ -5,7 +5,7 @@ This is a sample app for UCube SDK using .aar.
 
 <img align="left" src="https://github.com/sil-dev/UCubeAARSample/blob/master/screenshots/Screenshot_2021-07-29_122510_1.png"/>
   
-  build.gradle(:app)  
+  .  
   
   ```
    android {
