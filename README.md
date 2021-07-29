@@ -3,7 +3,7 @@ This is a sample app for UCube SDK using .aar.
 
 ### Copy 'ucubesdk-release.aar' to your app\libs folder and also add the below dependencies in the project's build.gradle as shown in given screenshot.
 
-<img align="left" src="https://github.com/sil-dev/UCubeAARSample/blob/master/screenshots/Screenshot_2021-07-29_122510_1.png"/><br /><br />
+<img align="left" src="https://github.com/sil-dev/UCubeAARSample/blob/master/screenshots/Screenshot_2021-07-29_122510_1.png"/><br><br>
 
 
 ```
