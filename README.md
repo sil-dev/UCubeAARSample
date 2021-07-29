@@ -5,6 +5,28 @@ This is a sample app for UCube SDK using .aar.
 
 <img align="left" src="https://github.com/sil-dev/UCubeAARSample/blob/master/screenshots/Screenshot_2021-07-29_122510_1.png"/>
 
+
+```
+android {
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    
+    //uCube Library
+    implementation files('libs/ucubesdk-release.aar')
+
+    implementation 'org.apache.commons:commons-io:1.3.2'
+    implementation 'commons-codec:commons-codec:20041127.091804'
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+}
+```
+
+
 ### Add the below permission in the manifest file 
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
