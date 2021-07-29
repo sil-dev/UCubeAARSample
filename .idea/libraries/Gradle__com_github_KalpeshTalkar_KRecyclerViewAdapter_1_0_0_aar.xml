@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.KalpeshTalkar:KRecyclerViewAdapter:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c146d6c4bb45e3fe5dd7229b8afe465/jetified-KRecyclerViewAdapter-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c146d6c4bb45e3fe5dd7229b8afe465/jetified-KRecyclerViewAdapter-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c146d6c4bb45e3fe5dd7229b8afe465/jetified-KRecyclerViewAdapter-1.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.KalpeshTalkar/KRecyclerViewAdapter/1.0.0/a70c84475db89e9e0c9374b713cbfd1ebdead78e/KRecyclerViewAdapter-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

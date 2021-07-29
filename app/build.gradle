@@ -1,0 +1,125 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.sil.ucubesample"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    useLibrary 'org.apache.http.legacy'
+}
+
+repositories {
+    maven {
+        url "https://maven.google.com"
+    }
+
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+
+    //KRecyclerViewAdapter
+    implementation 'com.github.KalpeshTalkar:KRecyclerViewAdapter:1.0.0'
+
+    //uCube Library
+    implementation files('libs/ucubesdk-release.aar')
+
+    implementation 'org.apache.commons:commons-io:1.3.2'
+    implementation 'commons-codec:commons-codec:20041127.091804'
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+/*
+Error :     java.lang.NoClassDefFoundError: Failed resolution of: Lcom/google/gson/Gson;
+
+Solutions :
+OK, this is a common issue. There are several ways to use an android library(aar) in other projects. For example:
+
+    1) By importing this aar as a module into your sample project by using implementation project(':mylibrary').
+
+    2) By uploading your aar to a maven repository(artifactory, maven local, Jitpack, etc)
+
+# Pay attention to this:
+
+*** If you are using number 1 above, so you will also have to add(retrofit, okhttp3, etc)
+    to your sample project with the same version, because the aar by default doesn't include child dependencies.
+    That's why you are getting that exception "java.lang.NoClassDefFoundError: Failed resolution of: Lokhttp3/OkHttpClient$Builder'". ***
+
+    If you are using number 2 above, so you will have to make sure that your pom.xml file includes your child dependencies, because the server needs to download and have them available in your sample project.
+
+# What do I recommend?
+
+    I recommend developers to use MavenLocal(), it replicates a real scenario before publishing your aar to a public repository like Jitpack or whatever you want.
+
+# How can I do it?
+
+    Inside build.gradle of your library module:
+
+    apply plugin: 'maven-publish'
+
+    project.afterEvaluate {
+        publishing {
+            publications {
+                library(MavenPublication) {
+                    setGroupId 'YOUR_GROUP_ID'
+                    //You can either define these here or get them from project conf elsewhere
+                    setArtifactId 'YOUR_ARTIFACT_ID'
+                    version android.defaultConfig.versionName
+                    artifact bundleReleaseAar //aar artifact you want to publish
+
+                    pom.withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        configurations.implementation.allDependencies.each {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Run assemble and publishToMavenLocal gradle tasks. And you'll see something like this: enter image description here
+
+# In your Sample Project
+
+    allprojects {
+        repositories {
+            mavenLocal()
+            ...
+        }
+    }
+
+    implementation '${YOUR_GROUP_ID}:${YOUR_ARTIFACT_ID}:${YOUR_VERSION}'
+
+
+# reference link : https://stackoverflow.com/questions/56989569/how-to-fix-java-lang-noclassdeffounderror-in-android-aar-project
+*/
